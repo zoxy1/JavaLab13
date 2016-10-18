@@ -29,44 +29,52 @@ public class Functions {
 				file.createNewFile();
 			}
 
-			// определ€ем переменную out типа PrintWriter, и создаем экземпл€р объекта  
+			// определ€ем переменную out типа PrintWriter, и создаем экземпл€р
+			// объекта
 			PrintWriter out = new PrintWriter(file.getAbsoluteFile());
 
 			try {
 				// с помощью метода print записываем строку text в файл
 				out.print(text);
 			} finally {
-				//закрываем файл, если не закрыть, то данные не запишутс€  
+				// закрываем файл, если не закрыть, то данные не запишутс€
 				out.close();
 			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+		} catch (IOException ewr) {
+			// throw new RuntimeException(ewr);
+			System.out.println(ewr.getMessage());
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		StringBuilder sb = new StringBuilder();
+	public static ArrayList<String> read(String fileName) {
+
 		ArrayList<String> stringList = new ArrayList<>();
-		String file = "E:/2/in.txt";
-		int numberLines = 0;
-		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
+
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
-				
 
-				numberLines++; //
 				stringList.add(line);
 
 			}
-			
+
 			reader.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+		return stringList;
+	}
+
+	public static void main(String[] args) throws IOException {
+		StringBuilder sb = new StringBuilder();
 
 		Calculation variableCalculation = new Calculation(1);
 		ArrayList<Double> doubleList = new ArrayList<>();
-		for (int i = 0; i < numberLines; i++) {
+		
+		ArrayList<String> stringList = new ArrayList<>();
+		stringList=read("E:/2/in.txt");
+		
+		for (int i = 0; i < stringList.size(); i++) {
 
 			String[] isParts = stringList.get(i).split(" ");
 
