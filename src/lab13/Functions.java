@@ -24,20 +24,19 @@ public class Functions {
 		File file = new File(fileName);
 
 		try {
-			// проверяем, что если файл не существует то создаем его
+			// если файла нет, то создаем его
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 
-			// PrintWriter обеспечит возможности записи в файл
+			// определяем переменную out типа PrintWriter, и создаем экземпляр объекта  
 			PrintWriter out = new PrintWriter(file.getAbsoluteFile());
 
 			try {
-				// Записываем текст у файл
+				// с помощью метода print записываем строку text в файл
 				out.print(text);
 			} finally {
-				// После чего мы должны закрыть файл
-				// Иначе файл не запишется
+				//закрываем файл, если не закрыть, то данные не запишутся  
 				out.close();
 			}
 		} catch (IOException e) {
@@ -53,13 +52,13 @@ public class Functions {
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
 			String line;
 			while ((line = reader.readLine()) != null) {
-				// System.out.println(line);
+				
 
 				numberLines++; //
 				stringList.add(line);
 
 			}
-			// System.out.println(numberLines);
+			
 			reader.close();
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
