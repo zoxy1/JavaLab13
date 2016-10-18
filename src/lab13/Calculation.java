@@ -14,11 +14,12 @@ public class Calculation {
 	private double c;
 	private double d;
 	private double x;
+
 	private int numberEquation = 1;
 
 	/**
-	 * The function can be selected when creating a class object, putting into
-	 * the constructor function number. You see formula in lab #13.
+	 * The constructor can be selected when creating a class object, putting
+	 * into the constructor function number. You see formula in lab #13.
 	 * 
 	 * @param numberEquation
 	 *            - function number
@@ -44,7 +45,6 @@ public class Calculation {
 	/**
 	 * This method calculates the value of a function depending on the
 	 * coefficients a, b, c, d
-	 * 
 	 * @param a
 	 *            - function coefficient;
 	 * @param b
@@ -55,7 +55,8 @@ public class Calculation {
 	 *            - function coefficient;
 	 * @param x
 	 *            - function parameter;
-	 * @return Return value have type double
+	 * @return - Return value equation
+	 * 
 	 */
 	public double calculateFunction(double a, double b, double c, double d, double x) {
 		this.setA(a);

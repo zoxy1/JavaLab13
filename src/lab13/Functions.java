@@ -18,7 +18,11 @@ public class Functions {
 	public Functions() {
 
 	}
-
+/**
+ * Function writes to file string
+ * @param fileName - path to file, for example "c:/text.txt" 
+ * @param text - this string will write to file 
+ */
 	public static void write(String fileName, String text) {
 		// Определяем файл
 		File file = new File(fileName);
@@ -45,7 +49,11 @@ public class Functions {
 			System.out.println(ewr.getMessage());
 		}
 	}
-
+/**
+ * Function reads file and writes rows to the Arraylist
+ * @param fileName  - path to file, for example "c:/text.txt" 
+ * @return - ArrayList<String> contains strings
+ */
 	public static ArrayList<String> read(String fileName) {
 
 		ArrayList<String> stringList = new ArrayList<>();
@@ -55,7 +63,6 @@ public class Functions {
 			while ((line = reader.readLine()) != null) {
 
 				stringList.add(line);
-
 			}
 
 			reader.close();
@@ -66,39 +73,51 @@ public class Functions {
 	}
 
 	public static void main(String[] args) throws IOException {
-		StringBuilder sb = new StringBuilder();
-
+		
+		// создаем объект класса Calculation и присваиваем ссылкуна него переменной variableCalculation
+		// в конструкторе передаем номер уравнения по которому будут выполняться вычисления 
 		Calculation variableCalculation = new Calculation(1);
+		
 		ArrayList<Double> doubleList = new ArrayList<>();
 		
 		ArrayList<String> stringList = new ArrayList<>();
-		stringList=read("E:/2/in.txt");
-		
+		// переменная stringList хранит список строк прочитанных из файла in.txt
+		stringList = read("E:/2/in.txt");
+		// в переменную sb записываем все полученные результаты 
+		StringBuilder sb = new StringBuilder();
+		// пробегаем по все му списку stringList(каждый элемент списка содержит одну строку)
 		for (int i = 0; i < stringList.size(); i++) {
 
-			String[] isParts = stringList.get(i).split(" ");
-
+			// все числа в строке записываем отдельно в массив isParts
+			String[] isParts = stringList.get(i).split(" "); 
+			// пробегаем по всему массиву isParts и преобразуем в Double и добавляем в список doubleList 
 			for (int j = 0; j < isParts.length; j++) {
 				doubleList.add(j, Double.parseDouble(isParts[j]));
 
 			}
-			Double x = doubleList.get(4);
-			Double y = 0.0d;
-
+			// минимальное значение аргумента х которое находится в списке doubleList по индексу 4 
+			Double x = doubleList.get(4); 
+			Double y = 0.0d; // переменная, значение вычисленной функции 
+			//выполняем пока аргумент х <= максимальному аргументу х 
 			while (x <= doubleList.get(5)) {
-
+				// вычисляем уравнение
 				y = variableCalculation.calculateFunction(doubleList.get(0), doubleList.get(1), doubleList.get(2), doubleList.get(3), x);
-				System.out.printf("%1$.2f", y);
+				// выводим значения уравнения для всег аргументов от минимального до максимального значения с шагом doubleList.get(6)
+				//выводим с точностью 2 знака после запятой
+				System.out.printf("%1$.2f", y); 
 				System.out.print(" ");
-				y.toString();
+				//в переменную sb класса StringBuilder помещаем значение уравнения через пробел 
 				sb.append(String.format("%.2f ", y) + " ");
-				x = x + doubleList.get(6);
+				// прибавляем к начальному значению аргумента шаг doubleList.get(6)
+				x = x + doubleList.get(6); 
 
 			}
+			// переводим на новую строку рассчет значений функции для других коэффициентов
 			System.out.print("\n");
+			// в переменную sb класса StringBuilder символ окончания строки
 			sb.append("\n");
 		}
-
+		// записываем в файл out.txt полученные результаты
 		Functions.write("E:/2/out.txt", sb.toString());
 	}
 
