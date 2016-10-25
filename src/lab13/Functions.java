@@ -103,6 +103,7 @@ public class Functions {
 
 			reader.close();
 		} catch (IOException e) {
+			
 			System.out.println(e.getMessage());
 		}
 		return stringList;
@@ -120,7 +121,7 @@ public class Functions {
 
 		ArrayList<String> stringList = new ArrayList<>();
 		// переменна€ stringList хранит список строк прочитанных из файла in.txt
-		stringList = read("E:/2/in.txt");
+		stringList = read("src/in.txt");
 		// в переменную sb записываем все полученные результаты
 		StringBuilder sb = new StringBuilder();
 		// пробегаем по все му списку stringList(каждый элемент списка содержит
@@ -163,13 +164,14 @@ public class Functions {
 			// в переменную sb класса StringBuilder символ окончани€ строки
 			sb.append("\n");
 		}
-		// записываем в файл out.txt полученные результаты
+		// записываем в файл out.txt полученные результаты с помощью метода write,
+		// который сам обрабатывает исключени€
 		Functions.write("E:/2/out.txt", sb.toString());
-		// записываем полученные результаты в файл out1.txt, использу€ метод
+		// записываем полученные результаты в файл out.txt, использу€ метод
 		// writeThrows,он сам не обрабатывает,он задает поведение так, 
 		//чтобы вызывающий его код мог позаботитьс€ об этом исключении.
 		try {
-			Functions.writeThrows("E:/2/out1.txt", sb.toString());
+			Functions.writeThrows("src/out.txt", sb.toString());
 		} catch (IOException ewr) {
 			System.out.println(ewr.getMessage());
 		}
